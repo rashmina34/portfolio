@@ -141,7 +141,7 @@ export default function Portfolio() {
             <h2 className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
               Rashmina Shrestha
             </h2>
-            <p className="text-2xl md:text-3xl text-purple-300 mb-6">Full-Stack Developer</p>
+            <p className="text-2xl md:text-3xl text-purple-300 mb-6">Senior Software Engineer</p>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
               Transforming complex business challenges into elegant, scalable solutions. I bridge the gap between cutting-edge technology and real-world impact, leading teams to build systems that drive meaningful results.
             </p>
