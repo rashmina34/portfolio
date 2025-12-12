@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Phone, Code, Briefcase, GraduationCap, ChevronDown, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, Code, Briefcase, GraduationCap, ChevronDown, Menu, X, Quote } from 'lucide-react';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [currentQuote, setCurrentQuote] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const quoteInterval = setInterval(() => {
+      setCurrentQuote((prev) => (prev + 1) % quotes.length);
+    }, 6000);
+    return () => clearInterval(quoteInterval);
   }, []);
 
   const skills = {
@@ -18,6 +26,29 @@ export default function Portfolio() {
     databases: ['PostgreSQL', 'MongoDB', 'SQL'],
     tools: ['Git', 'AWS', 'PySpark', 'Pandas', 'Jest']
   };
+
+  const quotes = [
+    {
+      text: "The only way to do great work is to love what you do.",
+      author: "Steve Jobs"
+    },
+    {
+      text: "Code is like humor. When you have to explain it, it's bad.",
+      author: "Cory House"
+    },
+    {
+      text: "First, solve the problem. Then, write the code.",
+      author: "John Johnson"
+    },
+    {
+      text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+      author: "Martin Fowler"
+    },
+    {
+      text: "Learning never exhausts the mind.",
+      author: "Leonardo da Vinci"
+    }
+  ];
 
   const experiences = [
     {
@@ -69,7 +100,7 @@ export default function Portfolio() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
-              {['home', 'about', 'experience', 'skills', 'contact'].map((section) => (
+              {['home', 'about', 'experience', 'quotes', 'skills', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -89,7 +120,7 @@ export default function Portfolio() {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 space-y-3">
-              {['home', 'about', 'experience', 'skills', 'contact'].map((section) => (
+              {['home', 'about', 'experience', 'quotes', 'skills', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -112,8 +143,7 @@ export default function Portfolio() {
             </h2>
             <p className="text-2xl md:text-3xl text-purple-300 mb-6">Full-Stack Developer</p>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-              Passionate about building scalable applications and improving systems in the US Healthcare space.
-              Specializing in React, Node.js, Java Spring Boot, and modern web technologies.
+              Transforming complex business challenges into elegant, scalable solutions. I bridge the gap between cutting-edge technology and real-world impact, leading teams to build systems that drive meaningful results.
             </p>
             <div className="flex justify-center space-x-4">
               <a href="mailto:rashminashrestha@gmail.com" className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg transition-colors flex items-center space-x-2">
@@ -137,16 +167,10 @@ export default function Portfolio() {
           <h3 className="text-4xl font-bold mb-8 text-center">About Me</h3>
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20">
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
-              As a dedicated full-stack developer with over 6 years of experience, I have a passion for improving
-              existing systems and applications while creating collaborative work environments. My journey has been
-              focused on the US Healthcare space, where I've led teams and developed complex applications handling
-              large datasets and dynamic queries.
+              As a dedicated full-stack developer with over 6 years of experience, I have a passion for improving existing systems and applications while creating collaborative work environments. I thrive on solving complex problems across diverse domains, from healthcare data systems to enterprise applications, always focusing on building scalable and efficient solutions.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
-              I find fulfillment in learning about cutting-edge technologies and continuously improving my expertise
-              in healthcare data systems. My experience spans from leading full-stack development projects to
-              implementing high-performance solutions using modern technologies like React, Next.js, Java Spring Boot,
-              and Node.js.
+              I find fulfillment in learning about cutting-edge technologies and continuously expanding my expertise. My journey has involved leading cross-functional teams, architecting robust applications that handle large-scale data processing, and implementing high-performance solutions that drive business value. Whether it's optimizing complex queries, building intuitive user interfaces, or designing resilient backend systems, I bring a holistic approach to every project.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="flex items-start space-x-3">
@@ -159,8 +183,8 @@ export default function Portfolio() {
               <div className="flex items-start space-x-3">
                 <Code className="text-purple-400 mt-1" size={24} />
                 <div>
-                  <h4 className="font-semibold mb-1">Specialization</h4>
-                  <p className="text-gray-400">US Healthcare Systems & Data</p>
+                  <h4 className="font-semibold mb-1">Expertise</h4>
+                  <p className="text-gray-400">Enterprise & Data-Intensive Systems</p>
                 </div>
               </div>
             </div>
@@ -212,6 +236,59 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* Inspirational Quotes Section */}
+      <section id="quotes" className="min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-br from-purple-900/30 to-slate-900/30">
+        <div className="max-w-4xl w-full">
+          <h3 className="text-4xl font-bold mb-12 text-center">Words That Inspire</h3>
+          <div className="relative">
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-12 border border-purple-500/20 min-h-[300px] flex flex-col items-center justify-center">
+              <Quote className="text-purple-400 mb-6" size={48} />
+              <blockquote className="text-center">
+                <p className="text-2xl md:text-3xl text-gray-200 font-light italic mb-6 leading-relaxed">
+                  "{quotes[currentQuote].text}"
+                </p>
+                <footer className="text-purple-400 text-xl">
+                  — {quotes[currentQuote].author}
+                </footer>
+              </blockquote>
+
+              {/* Quote navigation dots */}
+              <div className="flex space-x-2 mt-8">
+                {quotes.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentQuote(idx)}
+                    className={`w-3 h-3 rounded-full transition-all ${currentQuote === idx ? 'bg-purple-400 w-8' : 'bg-purple-400/30 hover:bg-purple-400/50'
+                      }`}
+                    aria-label={`View quote ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Manual navigation arrows */}
+            <button
+              onClick={() => setCurrentQuote((prev) => (prev - 1 + quotes.length) % quotes.length)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-purple-600/20 hover:bg-purple-600/40 p-3 rounded-full transition-colors border border-purple-500/30"
+              aria-label="Previous quote"
+            >
+              <ChevronDown className="rotate-90" size={24} />
+            </button>
+            <button
+              onClick={() => setCurrentQuote((prev) => (prev + 1) % quotes.length)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-purple-600/20 hover:bg-purple-600/40 p-3 rounded-full transition-colors border border-purple-500/30"
+              aria-label="Next quote"
+            >
+              <ChevronDown className="-rotate-90" size={24} />
+            </button>
+          </div>
+
+          <p className="text-center text-gray-400 mt-8 text-sm">
+            Auto-rotating every 6 seconds • Click dots or arrows to navigate
+          </p>
+        </div>
+      </section>
+
       {/* Skills Section */}
       <section id="skills" className="min-h-screen flex items-center justify-center px-6 py-20">
         <div className="max-w-5xl w-full">
@@ -251,10 +328,10 @@ export default function Portfolio() {
             </a>
           </div>
           <div className="flex justify-center space-x-6 mt-12">
-            <a href="https://github.com/rashmina" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
+            <a href="https://github.com/rashmina34" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
               <Github size={32} />
             </a>
-            <a href="https://linkedin.com/in/rashmina-shrestha" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
+            <a href="https://www.linkedin.com/in/rashmina-s-b58333189/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
               <Linkedin size={32} />
             </a>
           </div>
@@ -263,7 +340,7 @@ export default function Portfolio() {
 
       {/* Footer */}
       <footer className="bg-slate-900/80 py-8 text-center text-gray-400 border-t border-purple-500/20">
-        <p>© {new Date().getFullYear} Rashmina Shrestha. Built with React & Tailwind CSS.</p>
+        <p>© {new Date().getFullYear()} Rashmina Shrestha. Built with React & Tailwind CSS.</p>
       </footer>
     </div>
   );
