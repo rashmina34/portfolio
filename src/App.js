@@ -263,7 +263,7 @@ export default function Portfolio() {
 
       {/* Footer */}
       <footer className="bg-slate-900/80 py-8 text-center text-gray-400 border-t border-purple-500/20">
-        <p>© 2024 Rashmina Shrestha. Built with React & Tailwind CSS.</p>
+        <p>© {new Date().getFullYear} Rashmina Shrestha. Built with React & Tailwind CSS.</p>
       </footer>
     </div>
   );
